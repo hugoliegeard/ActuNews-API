@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 class Comment
@@ -18,6 +21,8 @@ class Comment
     private $id;
 
     /**
+     * @Assert\NotBlank(message="N'oubliez pas votre commentaire.")
+     * @Assert\Length(max="255", maxMessage="Attention, pas plus de 255 caractères.")
      * @ORM\Column(type="text")
      */
     private $content;
